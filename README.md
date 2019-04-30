@@ -3,3 +3,4 @@ Este projeto se baseia na analise de dados de um website atraves do uso de Sql q
 
 ## Etapas iniciais
 
+1. Faça o donwload do <a href=“https://www.python.org/downloads/“>Python 3</a> (o projeto está na versão 3.7.2)
