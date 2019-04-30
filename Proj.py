@@ -23,11 +23,6 @@ geral = c.fetchall()
 print(geral)
 
 """ 
-
-
-
-
-
 ### Quais sao os top 3 artigos ####
 
 select substring(articles,10) as articles, count(*) as views 
@@ -54,7 +49,6 @@ ORDER BY percent DESC;
 
 select time, (CASE WHEN percent > 1.0 THEN 'MORE THEN 1%' when percent <= 1.0 then 'none' else null END) as situation 
 from status;
-
 """
 
 
