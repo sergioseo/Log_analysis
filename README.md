@@ -19,8 +19,7 @@ Se já tiver algum dos programas listados abaixo e quiser usá-los, apenas certi
 
 ## Criando as views
 
-<ol>
-  <li>Segue a primeira <code>view</code>:</li>
+<p>Segue a primeira view:</p>
   <code>
     create view geral as select
     authors.name as authors, 
