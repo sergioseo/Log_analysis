@@ -32,4 +32,14 @@ Se já tiver algum dos programas listados abaixo e quiser usá-los, apenas certi
   </code>
 </pre>
 
-<p2>Segue a 
+<p2>Segue a view da terceira query <code>status</code>:</p2>
+<pre>
+  <code>
+  create view status as select time::date, 
+  (count(case when status != '200 OK' then 1 else null end)
+  ::float/count(status)::float)*100 as percent 
+  from log
+  group by time::date
+  order by percent desc;
+  </code>
+</pre>  
