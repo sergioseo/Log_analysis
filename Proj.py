@@ -3,23 +3,20 @@
 
 import psycopg2
 
-conn = psycopg2.connect(dbname="news")
 
+dbname = "news"
+conn = psycopg2.connect(dbname)
 c = conn.cursor()
-
 query = """
 select substring(articles,10) as articles, count(*) as views 
 from geral 
 group by articles 
 order by views desc 
 limit 3;
-
 """
 
 c.execute(query)
-
 geral = c.fetchall()
-
 print(geral)
 
 """ 
