@@ -20,7 +20,7 @@ Se já tiver algum dos programas listados abaixo e quiser usá-los, apenas certi
 ## Criando as views
 
 <p>Segue a primeira view:</p>
-  <code>
+  <div>
     create view geral as select
     authors.name as authors, 
     log.path as articles 
@@ -28,4 +28,4 @@ Se já tiver algum dos programas listados abaixo e quiser usá-los, apenas certi
     where authors.id = articles.author and 
     authors.name not like 'Anonymous Contributor' and 
     log.path not like '/';
-  </code>
+  </div>
