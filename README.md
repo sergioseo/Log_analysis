@@ -9,6 +9,7 @@ Se já tiver algum dos programas listados abaixo e quiser usá-los, apenas certi
   <li>Fazer o donwload e instalar o <a href="https://www.virtualbox.org/">Virtual Box</a></li> 
   <li>Fazer o download e instalar o <a href="https://www.vagrantup.com/downloads.html">Vagrant</a></li>
   <li>Fazer o download e instalar o <a href="https://git-scm.com/">Git</a></li>
-  <li>Fazer o download do banco de dados <a href="https://git-scm.com/">NEWS</a></li>
+  <li>Fazer o download do banco de dados: "newsdata.sql"</li>
   <li>Fazer o download da pasta <a href="https://git-scm.com/">Logs</a> com as pre-configurações do Vagrant</li>
+  <li>
 </ol>
