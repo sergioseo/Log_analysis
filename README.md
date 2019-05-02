@@ -22,5 +22,11 @@ Se já tiver algum dos programas listados abaixo e quiser usá-los, apenas certi
 <ol>
   <li>Segue a primeira <code>view</code>:</li>
   <code>
-    
+    create view geral as select
+    authors.name as authors, 
+    log.path as articles 
+    from authors, articles, log 
+    where authors.id = articles.author and 
+    authors.name not like 'Anonymous Contributor' and 
+    log.path not like '/';
   </code>
