@@ -9,7 +9,7 @@ Se já tiver algum dos programas listados abaixo e quiser usá-los, apenas certi
   <li>Fazer o donwload e instalar o <a href="https://www.virtualbox.org/">Virtual Box</a></li> 
   <li>Fazer o download e instalar o <a href="https://www.vagrantup.com/downloads.html">Vagrant</a></li>
   <li>Fazer o download e instalar o <a href="https://git-scm.com/">Git</a></li>
-  <li>Fazer o download do banco de dados <code>newsdata.sql</code></li>
+  <li>Fazer o download do database zipado <code>newsdata.sql</code></li>
   <li>Fazer o download da pasta <a href="https://git-scm.com/">VM</a> com as pre-configurações do <code>Vagrant</code></li>
   <li>Depois de instalar o vagrant vá ao seu terminal e coloque na mesma pasta o banco de dados <code>newsdata.sql</code> e a pasta<code>VM</code></li>
   <li>Dentro desta mesma pasta use o comando <code>vagrant up</code> e logo em seguida <code>vagrant ssh</code> para acessar a VM</li>
