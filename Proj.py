@@ -1,77 +1,55 @@
-#!/usr/bin/env python2.7
-# -*- coding: utf-8 -*-
+#!/usr/bin/env python3
 
 import psycopg2
 
 
-dbname = "news"
-conn = psycopg2.connect(dbname)
-c = conn.cursor()
-query = """
-select substring(articles,10) as articles, count(*) as views 
-from geral 
-group by articles 
-order by views desc 
-limit 3;
-"""
+def general():
+    # Conectar ao banco de dados
+    conn = psycopg2.connect("dbname=news")
+    cur = conn.cursor()
 
-c.execute(query)
-geral = c.fetchall()
-print(geral)
+    # Quais são os três artigos mais populares de todos os tempos?
+    top_articles = """
+      select substring(articles,10) as articles, count(*) as views 
+      from geral 
+      group by articles 
+      order by views desc 
+      limit 3;
+      """
+    cur.execute(top_articles)
+    print("Artigos mais populares:")
+    for (titulo, view) in cur.fetchall():
+        print("    {} - {} views".format(titulo, view))
+    print("\n")
 
-""" 
-### Quais sao os top 3 artigos ####
+    # Quem são os autores de artigos mais populares de todos os tempos?
+    top_authors = """
+    select authors,count(*) as views 
+    from geral 
+    group by authors 
+    order by views desc 
+    limit 3;
+    """
+    cur.execute(top_authors)
+    print("Autores mais populares:")
+    for (name, view) in cur.fetchall():
+        print("    {} - {} views".format(name, view))
+    print("\n")
 
-select substring(articles,10) as articles, count(*) as views 
-from geral 
-group by articles 
-order by views desc 
-limit 3;
+    # Em quais dias mais de 1% das requisições resultaram em erros?
+    percentual_erros = """
+    select time, (CASE WHEN percent > 1.0 THEN 'MORE THEN 1%' 
+    when percent <= 1.0 then 'none' else null END) as situation 
+    from status;
+    """
+    cur.execute(percentual_erros)
+    print("Dia com mais de 1% de erro")
+    for (date, perc) in cur.fetchall():
+        print("    {} - {}% errors".format(date, perc))
+    print("\n")
 
-### Quais autores mais populares? ####
+    cur.close()
+    conn.close()
 
-select authors,count(*) as views 
-from geral 
-group by authors 
-order by views desc 
-limit 3;
-
-### Em quais dias mais de 1% das requisições resultaram em erro? ###
-
-create view status as 
-	select time::date, (count(case when status != '200 OK' and then 1 else null end)::float/count(status)::float)*100 as percent 
-FROM log 
-GROUP BY time::date 
-ORDER BY percent DESC;
-
-select time, (CASE WHEN percent > 1.0 THEN 'MORE THEN 1%' when percent <= 1.0 then 'none' else null END) as situation 
-from status;
-"""
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+if __name__ == "__main__":
+    main()
