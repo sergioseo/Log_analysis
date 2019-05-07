@@ -1,4 +1,5 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 import psycopg2
 
@@ -10,10 +11,10 @@ def general():
 
     # Quais são os três artigos mais populares de todos os tempos?
     top_articles = """
-      select substring(articles,10) as articles, count(*) as views 
-      from geral 
-      group by articles 
-      order by views desc 
+      select substring(articles,10) as articles, count(*) as views
+      from geral
+      group by articles
+      order by views desc
       limit 3;
       """
     cur.execute(top_articles)
@@ -24,10 +25,10 @@ def general():
 
     # Quem são os autores de artigos mais populares de todos os tempos?
     top_authors = """
-    select authors,count(*) as views 
-    from geral 
-    group by authors 
-    order by views desc 
+    select authors,count(*) as views
+    from geral
+    group by authors
+    order by views desc
     limit 3;
     """
     cur.execute(top_authors)
@@ -38,18 +39,18 @@ def general():
 
     # Em quais dias mais de 1% das requisições resultaram em erros?
     percentual_erros = """
-    select time, (CASE WHEN percent > 1.0 THEN 'MORE THEN 1%' 
-    when percent <= 1.0 then 'none' else null END) as situation 
+    select time, (CASE WHEN percent > 1.0 THEN 'Mais do que 1%' 
+    when percent <= 1.0 then 'none' else null END) as situation
     from status;
     """
     cur.execute(percentual_erros)
     print("Dia com mais de 1% de erro")
     for (date, perc) in cur.fetchall():
-        print("    {} - {}% errors".format(date, perc))
+        print("    {} - {}".format(date, perc))
     print("\n")
 
     cur.close()
     conn.close()
 
 if __name__ == "__main__":
-    main()
+    general()
