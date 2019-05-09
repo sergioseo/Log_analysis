@@ -14,21 +14,20 @@ def general():
       select * from articleSum limit 3;
       """
     cur.execute(top_articles)
-    print("Artigos mais populares:")
+    print("Quais são os três artigos mais populares de todos os tempos?")
     for (titulo, view) in cur.fetchall():
         print("    {} - {} views".format(titulo, view))
     print("\n")
 
     # Quem são os autores de artigos mais populares de todos os tempos?
     top_authors = """
-    select authors,count(*) as views
-    from geral
-    group by authors
-    order by views desc
-    limit 3;
+    select name, sum(articleSum.views) as views
+    from authorId, articleSum
+    where articleSum.title = authorId.title 
+    group by name order by views desc;"""
     """
     cur.execute(top_authors)
-    print("Autores mais populares:")
+    print("Quem são os autores de artigos mais populares de todos os tempos?")
     for (name, view) in cur.fetchall():
         print("    {} - {} views".format(name, view))
     print("\n")
@@ -40,7 +39,7 @@ def general():
     from status;
     """
     cur.execute(percentual_erros)
-    print("Dia com mais de 1% de erro")
+    print("Em quais dias mais de 1% das requisições resultaram em erros?")
     for (date, perc) in cur.fetchall():
         print("    {} - {}".format(date, perc))
     print("\n")
