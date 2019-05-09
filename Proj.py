@@ -11,11 +11,7 @@ def general():
 
     # Quais são os três artigos mais populares de todos os tempos?
     top_articles = """
-      select substring(articles,10) as articles, count(*) as views
-      from geral
-      group by articles
-      order by views desc
-      limit 3;
+      select * from articleSum limit 3;
       """
     cur.execute(top_articles)
     print("Artigos mais populares:")
