@@ -23,7 +23,7 @@ def general():
     top_authors = """
     select name, sum(articleSum.views) as views
     from authorId, articleSum
-    where articleSum.title = authorId.title 
+    where articleSum.title = authorId.title
     group by name order by views desc;
     """
     cur.execute(top_authors)
@@ -41,9 +41,9 @@ def general():
     for (date, perc) in cur.fetchall():
         print("    {} : {:.2f}% erro".format(date, perc))
     print("\n")
-
     cur.close()
     conn.close()
+
 
 if __name__ == "__main__":
     general()
