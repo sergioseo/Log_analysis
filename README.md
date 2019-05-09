@@ -19,20 +19,30 @@ Se já tiver algum dos programas listados abaixo e quiser usá-los, apenas certi
 
 ## Criando as views
 
-<p1>Segue a view <code>geral</code>:</p1>
+<p1>Segue a view <code>authorId</code> para identificar o autor e o seu artigo :</p1>
 <pre>
   <code>
-  create view geral as select
-  authors.name as authors, 
-  log.path as articles 
-  from authors, articles, log 
+  create view authorId as 
+  select title, name from articles, authors 
   where authors.id = articles.author and 
-  authors.name not like 'Anonymous Contributor' and 
-  log.path not like '/';
+  authors.name not like 'Anonymous Contributor';
   </code>
 </pre>
 
+
 <p2>Segue a view da terceira query <code>status</code>:</p2>
+<pre>
+  <code>
+  create view status as select time::date, 
+  (count(case when status != '200 OK' then 1 else null end)
+  ::float/count(status)::float)*100 as percent 
+  from log
+  group by time::date
+  order by percent desc;
+  </code>
+</pre>
+
+<p3>Segue a view da terceira query <code>status</code>:</p3>
 <pre>
   <code>
   create view status as select time::date, 
