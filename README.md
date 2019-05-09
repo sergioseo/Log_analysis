@@ -19,7 +19,7 @@ Se já tiver algum dos programas listados abaixo e quiser usá-los, apenas certi
 
 ## Criando as views
 
-<p1>Segue a view <code>authorId</code> para identificar o autor e o seu artigo :</p1>
+<p1>Criando a view <code>authorId</code> para identificar o autor e o seu artigo :</p1>
 <pre>
   <code>
   create view authorId as 
@@ -30,15 +30,14 @@ Se já tiver algum dos programas listados abaixo e quiser usá-los, apenas certi
 </pre>
 
 
-<p2>Segue a view da terceira query <code>status</code>:</p2>
+<p2>Criando a view <code>articleSum</code> para somar as views dos artigos:</p2>
 <pre>
   <code>
-  create view status as select time::date, 
-  (count(case when status != '200 OK' then 1 else null end)
-  ::float/count(status)::float)*100 as percent 
-  from log
-  group by time::date
-  order by percent desc;
+  create view articleSum as
+  select title, count(log.id) as views
+  from log, articles
+  where log.path = CONCAT('/article/', articles.slug)
+  group by articles.title order by views desc;
   </code>
 </pre>
 
